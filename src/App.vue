@@ -1,8 +1,9 @@
 <template>
   <div id="app">
-    <search-module />
+    <search-module @getText="getText" />
     <to-do-form @createItem="createItem" />
     <to-do-list :list="list" @deleteItem="deleteItem" />
+    {{ getText }}
   </div>
 </template>
 
@@ -29,6 +30,11 @@ export default {
     },
     deleteItem(id) {
       this.list = this.list.filter((t) => t.id !== id);
+    },
+    getText(text) {
+      this.list = this.list.filter((t) =>
+        t.title.toLowerCase().includes(text.toLowerCase())
+      );
     },
   },
 };

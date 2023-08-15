@@ -1,7 +1,8 @@
 <template>
   <div class="search">
     <h3>Поиск</h3>
-    <input type="text" />
+    <input type="text" v-model="text" @input="emitText" />
+    {{ text }}
   </div>
 </template>
 
@@ -9,9 +10,15 @@
 export default {
   name: "SearchModule",
   data() {
-    return {};
+    return {
+      text: "",
+    };
   },
-  methods: {},
+  methods: {
+    emitText() {
+      this.$emit("getText", this.text);
+    },
+  },
 };
 </script>
 
