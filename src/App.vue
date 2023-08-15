@@ -1,28 +1,35 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <search-module />
+    <to-do-form @createItem="createItem" />
+    <to-do-list :list="list" @deleteItem="deleteItem" />
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import ToDoForm from "./components/ToDoForm";
+import ToDoList from "./components/ToDoList";
+import SearchModule from "./components/SearchModule";
 
 export default {
-  name: 'App',
-  components: {
-    HelloWorld
-  }
-}
+  name: "App",
+  components: { ToDoForm, ToDoList, SearchModule },
+  data() {
+    return {
+      list: [
+        { id: 1, title: "Hello", completed: false },
+        { id: 2, title: "ffdfdf", completed: false },
+        { id: 3, title: "123hthrth", completed: false },
+      ],
+    };
+  },
+  methods: {
+    createItem(item) {
+      this.list.push(item);
+    },
+    deleteItem(id) {
+      this.list = this.list.filter((t) => t.id !== id);
+    },
+  },
+};
 </script>
-
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
-</style>
